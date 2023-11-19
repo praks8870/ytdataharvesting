@@ -20,7 +20,7 @@ client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client['youtube_data']
 
 
-API_KEY = 'AIzaSyDg0lv52ov9xx1tENd9qljGVhkOJbzy0NY'
+API_KEY = 'Your API key'
 youtube = build('youtube', 'v3', developerKey=API_KEY)
 
 
