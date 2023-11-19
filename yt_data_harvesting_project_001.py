@@ -11,7 +11,7 @@ mydb = psycopg2.connect(
     host = "localhost",
     database = "postgres",
     user = "postgres",
-    password = "123456")
+    password = "******")
 
 mycursor = mydb.cursor()
 
