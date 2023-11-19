@@ -7,7 +7,7 @@
 
 Greettings everyone!
 
-Thanks for your attntion, 
+Thanks for your attention, 
 This is about my project on Youtube data analysis using Google youtube API, MongoDB, PostgreSQL and Streamlit, in Python platform
 I have attached the source code in the following jupyter notebooks and python extension file.
 In the notebook file you can learn and try out the individual funcions of this project.
