@@ -29,11 +29,17 @@ In the final create sql queries to provide the answers for the asked questions.
 **Python libraries used**
 
   1.Pandas
+  
   2.psycopg2
+  
   3.Google-api-python-client
+  
   4.Pymongo
+  
   5.Psycopg2
+  
   6.Plotly.express
+  
   7.Streamlit_option_menu
 
 **Coding Steps**
