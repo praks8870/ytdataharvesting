@@ -42,7 +42,7 @@ In the final create sql queries to provide the answers for the asked questions.
   
   7.Streamlit_option_menu
 
-**Coding Steps**
+# Coding Steps
 
 Step-1: Need to import the required libraries.
 
