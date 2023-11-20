@@ -11,7 +11,7 @@ mydb = psycopg2.connect(
     host = "localhost",
     database = "postgres",
     user = "postgres",
-    password = "******")
+    password = "123456")
 
 mycursor = mydb.cursor()
 
@@ -20,7 +20,7 @@ client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client['youtube_data']
 
 
-API_KEY = 'Your API key'
+API_KEY = 'AIzaSyDg0lv52ov9xx1tENd9qljGVhkOJbzy0NY'
 youtube = build('youtube', 'v3', developerKey=API_KEY)
 
 
@@ -54,21 +54,32 @@ def channel_details(channel_id):
 def playlist_data(channel_id):
     pl_data = []
 
-    request = youtube.playlists().list(
+    request = youtube.channels().list(
         part = "snippet",
-        channelId = channel_id,
-        # id = playlist_id
+        id=channel_id
     )
     response = request.execute()
 
-    for i in range(len(response['items'])):
-        data = dict(channel_id = channel_id,
-                    playlist_id = response['items'][i]['id'],
-                    playlist_name = response['items'][i]['snippet']['title']
-                    )
-        
+    channel_name = response['items'][0]['snippet']['title']
+
+    pl_request = youtube.playlists().list(
+        part="snippet",
+        channelId = channel_id,
+    )
+    pl_response = pl_request.execute()
+
+    for i in range(len(pl_response['items'])):
+        data = dict(
+            channel_name = channel_name,
+            channel_id = channel_id,
+            playlist_id = pl_response['items'][i]['id'],
+            playlist_name = pl_response['items'][i]['snippet']['title']
+        )
+
         pl_data.append(data)
+
     return pl_data
+
 
 
 #use this function to get video ids of the channel you entered
@@ -223,6 +234,23 @@ def sql_table_create():
         print("Error:", e)
         mydb.rollback()
 
+    create_table_query_playlist = """
+    CREATE TABLE IF NOT EXISTS playlist (
+        channel_name TEXT,
+        channel_id VARCHAR(255),
+        playlist_id VARCHAR(255),
+        playlist_name VARCHAR(255)
+    );
+    """
+
+    try:
+        mycursor.execute(create_table_query_playlist)
+        mydb.commit()
+        print("Tables created successfully.")
+    except Exception as e:
+        print("Error:", e)
+        mydb.rollback()
+
 
 table = sql_table_create()
 
@@ -284,6 +312,7 @@ if selected == "Harvest & Store The Data":
                 ch_details = channel_details(ch_id)
                 video_ids = channel_videos(ch_id)
                 vid_details = video_details(video_ids)
+                playlist_details = playlist_data(ch_id)
 
 
 
@@ -298,11 +327,13 @@ if selected == "Harvest & Store The Data":
                 collection1 = db.channel_details
                 collection2 = db.video_details
                 collection3 = db.comment_details
+                collection4 = db.playlist_details
 
 
                 collection1.insert_many(ch_details)
                 collection2.insert_many(vid_details)
                 collection3.insert_many(com_details)
+                collection4.insert_many(playlist_details)
 
 
                 st.success(" Upload to MongoDB successful !!")
@@ -350,6 +381,19 @@ if selected == "Harvest & Store The Data":
                         mycursor.execute(query2,tuple(i.values()))
                         mydb.commit()
 
+
+
+        def insert_into_playlist():
+            collections4 = db.playlist_details
+            query3 = """INSERT INTO playlist (channel_name, channel_id, playlist_id, playlist_name) 
+                                             values(%s,%s,%s,%s)
+                                             """
+            
+            for i in collections4.find({"channel_name" : user_input},{'_id' : 0}):
+                            mycursor.execute(query3,tuple(i.values()))
+                            mydb.commit()
+
+
         if st.button("Submit"):
             st.balloons()
 
@@ -371,6 +415,13 @@ if selected == "Harvest & Store The Data":
                 insert_into_channels()
                 
                 st.success("channel details Transformation to PGSSQL Successful !!")
+            except:
+                st.error("Details already transformed !!")
+
+            try:
+                insert_into_playlist()
+                
+                st.success("playlist details Transformation to PGSSQL Successful !!")
             except:
                 st.error("Details already transformed !!")
 
