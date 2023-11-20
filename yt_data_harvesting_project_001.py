@@ -31,7 +31,7 @@ def channel_details(channel_id):
 
     request = youtube.channels().list(
         part = "snippet,contentDetails,statistics",
-        id = channel_id  # Use the provided channel_id directly
+        id = channel_id  
         )
     response = request.execute()
 
