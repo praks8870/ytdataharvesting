@@ -32,6 +32,7 @@ In the final create sql queries to provide the answers for the asked questions.
 7.Streamlit_option_menu
 
 **Coding Steps**
+
 Step-1: Need to import the required libraries.
 
 Step-2: Get your api key for youtube api from google developers console,
