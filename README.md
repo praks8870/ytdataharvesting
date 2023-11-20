@@ -18,7 +18,7 @@ First extract the individual data using seperate functions, then modified the co
 Then store the extracted data into a data lake called MongoDB.
 Then tranform and store the data into a sql server and sto the data into tables.
 
-This code is derived to analyze the sample data scraped from the given channel_id, The scraping data is limited to 50 for video and comment data
+This code is derived to analyze the sample data scraped from the given channel_id, The scraping data is limited to 50 data for videos and comment data
 due to the scraping limitations for youtube api as a free user, However this code can be used to analyze the sample data to give thoughtful
 insights to understand how this data scraping and analyzing works.
 
