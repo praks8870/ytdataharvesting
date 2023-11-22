@@ -69,6 +69,5 @@ If you want to run this on your database, Please copy the code and change the da
 
 I also given the notebook version to understand the code completely. Try out and give the feedbacks.
 
-You can watch the video of how this project works by clicking here.
 
 #                  THANK YOU
