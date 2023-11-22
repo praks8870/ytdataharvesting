@@ -284,7 +284,7 @@ if selected == "Home":
     col1, col2 = st.columns(2, gap = 'medium')
     col1.markdown(" ## :green[Domain] : Social Media" )
     col1.markdown("## :green[Technologies used] : Python, MongoDB, Google-API-Python client, PostgreSql, Plotly, Streamlit")
-    col1.markdown("## :green[Overview] : Retrieving the Youtube channels data from the Google API, storing it in a MongoDB as data lake, migrating and transforming data into a SQL database,then querying the data and displaying it in the Streamlit app.")
+    col1.markdown("## :green[Overview] : Retrieving the Youtube channels data from the Google API, storing it in a MongoDB as data lake, migrating and transforming data into a SQL database, then querying the data and displaying it in the Streamlit app.")
     col2.markdown("#   ")
     col2.markdown("#   ")
     col2.markdown("#   ")
