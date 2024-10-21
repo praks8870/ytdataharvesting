@@ -256,7 +256,7 @@ table = sql_table_create()
 
 
 #Create a web page on streamlit
-icon = Image.open("D:\project\Youtube_logo.png")
+icon = Image.open("Youtube_logo.png")
 st.set_page_config(page_title = "YouTube Data Harvesting and Warehousing using SQL, MongoDB and Streamlit",
                    page_icon = icon,
                    layout = 'wide',
